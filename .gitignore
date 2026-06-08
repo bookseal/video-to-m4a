@@ -1,0 +1,15 @@
+# Python
+__pycache__/
+*.py[cod]
+
+# 변환 결과물 / 미디어
+*.m4a
+*.mp4
+*.mov
+*.mkv
+*.avi
+*.webm
+*.m4v
+
+# macOS
+.DS_Store
