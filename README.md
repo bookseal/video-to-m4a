@@ -9,7 +9,7 @@ A small CLI tool that picks a recent video file and converts it to an `.m4a` aud
    newest modified first, with their sizes.
 2. You pick a number, and it extracts the audio from that video.
 3. The output name starts with a fixed timestamp prefix from the video's
-   **creation time**: `YYYYMMDD_HHMM_` (for example `2020260608_1405_`).
+   **creation time**: `YYMMDD_HHMM_` (for example `260601_1103_`).
    You can then type the rest of the name, or press Enter to keep the
    original file name.
 
@@ -41,15 +41,15 @@ Recent video files:
 
 Select a number to convert (1-2, Enter to cancel): 1
 
-Output name example: 20260608_1405_my_clip.m4a
-Type a name after '20260608_1405_' (Enter to keep 'my_clip'): interview
+Output name example: 260601_1103_my_clip.m4a
+Type a name after '260601_1103_' (Enter to keep 'my_clip'): interview
 
-Converting: my_clip.mov -> 20260608_1405_interview.m4a
+Converting: my_clip.mov -> 260601_1103_interview.m4a
 
-Done: 20260608_1405_interview.m4a
+Done: 260601_1103_interview.m4a
 ```
 
-Pressing Enter at the name prompt would produce `20260608_1405_my_clip.m4a`.
+Pressing Enter at the name prompt would produce `260601_1103_my_clip.m4a`.
 
 ## How the conversion works
 
