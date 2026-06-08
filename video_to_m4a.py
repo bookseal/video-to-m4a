@@ -32,14 +32,14 @@ def human_size(num_bytes: int) -> str:
 
 
 def created_stamp(path: Path) -> str:
-    """Return the file's creation time as 'YYMMDD_HHMM' (e.g. '260608_1405').
+    """Return the file's creation time as 'YYYYMMDD_HHMM' (e.g. '20260608_1405').
 
     macOS exposes the creation time via st_birthtime; fall back to the
     modification time (st_mtime) when it is not available.
     """
     st = path.stat()
     ts = getattr(st, "st_birthtime", st.st_mtime)
-    return datetime.fromtimestamp(ts).strftime("%y%m%d_%H%M")
+    return datetime.fromtimestamp(ts).strftime("%Y%m%d_%H%M")
 
 
 def find_recent_videos(directory: Path, limit: int) -> list[Path]:
@@ -72,7 +72,7 @@ def choose_video(videos: list[Path]) -> Path | None:
 def prompt_output_path(src: Path) -> Path:
     """Build the output path. The timestamp prefix is fixed; the user can
     type the rest of the name, or press Enter to keep the original name."""
-    prefix = f"{created_stamp(src)}_"          # e.g. "260608_1405_"
+    prefix = f"{created_stamp(src)}_"          # e.g. "20260608_1405_"
     default_suffix = src.stem                   # original name without extension
     print(f"\nOutput name example: {prefix}{default_suffix}.m4a")
 
