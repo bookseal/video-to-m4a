@@ -1,16 +1,19 @@
 # video-to-m4a
 
-최근 동영상 파일을 골라 같은 이름의 `.m4a` 오디오로 변환하는 간단한 CLI 도구.
+A small CLI tool that picks a recent video file and converts it to an `.m4a` audio file.
 
-## 동작
+## What it does
 
-1. 현재 디렉터리에서 동영상 파일(mp4, mov, mkv, avi, webm, m4v, flv, wmv)을 찾아
-   **최신 수정순**으로 최대 10개를 크기와 함께 나열한다.
-2. 번호를 선택하면 해당 동영상의 오디오를 추출한다.
-3. 출력 파일명은 `원본이름_YYYYMMDD_HHMMSS.m4a` 형식으로,
-   동영상의 **생성 시각**이 붙는다.
+1. Scans the current directory for video files
+   (mp4, mov, mkv, avi, webm, m4v, flv, wmv) and lists up to 10,
+   newest modified first, with their sizes.
+2. You pick a number, and it extracts the audio from that video.
+3. The output name starts with a fixed timestamp prefix from the video's
+   **creation time**: `YYMMDD_HHMM_` (for example `260608_1405_`).
+   You can then type the rest of the name, or press Enter to keep the
+   original file name.
 
-## 요구사항
+## Requirements
 
 - Python 3.7+
 - [ffmpeg](https://ffmpeg.org/)
@@ -19,32 +22,39 @@
 brew install ffmpeg
 ```
 
-## 사용법
+## Usage
 
-동영상이 있는 폴더에서 실행한다.
+Run it from the folder that contains your videos.
 
 ```sh
-cd <동영상 폴더>
+cd <folder with videos>
 python3 video_to_m4a.py
 ```
 
+Example session:
+
 ```
-최근 동영상 파일:
+Recent video files:
 
   [1] my_clip.mov  (24.3MB)
   [2] lecture.mp4  (512.0MB)
 
-변환할 번호를 선택하세요 (1-2, 취소: Enter): 1
+Select a number to convert (1-2, Enter to cancel): 1
 
-변환 중: my_clip.mov → my_clip_20260608_230503.m4a
+Output name example: 260608_1405_my_clip.m4a
+Type a name after '260608_1405_' (Enter to keep 'my_clip'): interview
 
-완료: my_clip_20260608_230503.m4a
+Converting: my_clip.mov -> 260608_1405_interview.m4a
+
+Done: 260608_1405_interview.m4a
 ```
 
-## 변환 방식
+Pressing Enter at the name prompt would produce `260608_1405_my_clip.m4a`.
 
-ffmpeg로 비디오 스트림을 제거(`-vn`)하고 오디오를 AAC 192k로 재인코딩한다.
-원본 오디오 코덱과 무관하게 항상 동작한다.
+## How the conversion works
+
+ffmpeg drops the video stream (`-vn`) and re-encodes the audio to AAC at
+192 kbps. This works regardless of the source's original audio codec.
 
 ## License
 
